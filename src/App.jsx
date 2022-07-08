@@ -2,7 +2,7 @@ import { Layout } from 'antd';
 import 'antd/dist/antd.min.css';
 import React from 'react';
 import './App.css';
-import Home from './components/Home';
+import Home from './components/Home/Home';
 const { Header, Footer, Content } = Layout;
 
 const App = () => {

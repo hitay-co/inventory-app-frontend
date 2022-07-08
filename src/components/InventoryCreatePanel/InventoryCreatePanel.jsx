@@ -9,18 +9,18 @@ import {
   Select,
   Space,
 } from 'antd';
-import './Home.css';
 
 const { Option } = Select;
 
-const Home = () => {
+const InventoryCreatePanel = () => {
   const typeOptions = ['Computer', 'Monitor', 'Keyboard', 'Printer'];
 
-  const onFinish = (formData) => {};
+  const onSubmit = (formData) => {};
+
   return (
-    <div className='home-container'>
+    <>
       <Divider orientation='left'>New Inventory</Divider>
-      <Form onFinish={onFinish}>
+      <Form onFinish={onSubmit}>
         <Space className='container'>
           <Row gutter={[16, 16]}>
             <Col>
@@ -40,7 +40,10 @@ const Home = () => {
                     label='Inventory Type'
                     labelCol={{ span: 24 }}
                   >
-                    <Select className='home-container-select' allowClear>
+                    <Select
+                      className='inventory-create-panel-select'
+                      allowClear
+                    >
                       {typeOptions.map((type, index) => (
                         <Option key={index} value={type}>
                           {type}
@@ -67,8 +70,8 @@ const Home = () => {
           </Row>
         </Space>
       </Form>
-    </div>
+    </>
   );
 };
 
-export default Home;
+export default InventoryCreatePanel;
