@@ -1,61 +1,72 @@
 import {
   Button,
   Col,
+  Form,
   Divider,
   Input,
   InputNumber,
   Row,
   Select,
   Space,
-  Typography,
 } from 'antd';
 import './Home.css';
 
-const { Text } = Typography;
 const { Option } = Select;
 
 const Home = () => {
   const typeOptions = ['Computer', 'Monitor', 'Keyboard', 'Printer'];
 
+  const onFinish = (formData) => {};
   return (
     <div className='home-container'>
       <Divider orientation='left'>New Inventory</Divider>
-      <Space className='container'>
-        <Row gutter={[16, 16]} align='bottom' wrap={false}>
-          <Col>
-            <Row gutter={[24, 24]}>
-              <Col>
-                <Space direction='vertical'>
-                  <Text>Inventory Name</Text>
-                  <Input />
-                </Space>
-              </Col>
-              <Col>
-                <Space direction='vertical'>
-                  <Text>Inventory Type</Text>
-                  <Select className='home-container-select' allowClear>
-                    {typeOptions.map((type, index) => (
-                      <Option key={index} value={type}>
-                        {type}
-                      </Option>
-                    ))}
-                  </Select>
-                </Space>
-              </Col>
-              <Col>
-                <Space direction='vertical'>
-                  <Text>Quantity</Text>
-                  <InputNumber />
-                </Space>
-              </Col>
-            </Row>
-          </Col>
+      <Form onFinish={onFinish}>
+        <Space className='container'>
+          <Row gutter={[16, 16]}>
+            <Col>
+              <Row gutter={[24, 24]} align='bottom' wrap={false}>
+                <Col>
+                  <Form.Item
+                    name='name'
+                    label='Inventory Name'
+                    labelCol={{ span: 24 }}
+                  >
+                    <Input />
+                  </Form.Item>
+                </Col>
+                <Col>
+                  <Form.Item
+                    name='type'
+                    label='Inventory Type'
+                    labelCol={{ span: 24 }}
+                  >
+                    <Select className='home-container-select' allowClear>
+                      {typeOptions.map((type, index) => (
+                        <Option key={index} value={type}>
+                          {type}
+                        </Option>
+                      ))}
+                    </Select>
+                  </Form.Item>
+                </Col>
+                <Col>
+                  <Form.Item
+                    name='quantity'
+                    label='Quantity'
+                    labelCol={{ span: 24 }}
+                  >
+                    <InputNumber />
+                  </Form.Item>
+                </Col>
+              </Row>
+            </Col>
 
-          <Col>
-            <Button>Save</Button>
-          </Col>
-        </Row>
-      </Space>
+            <Col>
+              <Button htmlType='submit'>Save</Button>
+            </Col>
+          </Row>
+        </Space>
+      </Form>
     </div>
   );
 };
