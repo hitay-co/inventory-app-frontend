@@ -1,8 +1,9 @@
 import { Space, Table } from 'antd';
+import './InventoryTable.css';
 
 const columns = [
   {
-    title: 'Name',
+    title: 'Inventory Name',
     dataIndex: 'name',
     key: 'name',
   },

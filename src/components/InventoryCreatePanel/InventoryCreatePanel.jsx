@@ -1,14 +1,15 @@
 import {
   Button,
   Col,
-  Form,
   Divider,
+  Form,
   Input,
   InputNumber,
   Row,
   Select,
   Space,
 } from 'antd';
+import './InventoryCreatePanel.css';
 
 const { Option } = Select;
 
@@ -18,13 +19,13 @@ const InventoryCreatePanel = () => {
   const onSubmit = (formData) => {};
 
   return (
-    <>
+    <div className='inventory-create-panel-container'>
       <Divider orientation='left'>New Inventory</Divider>
       <Form onFinish={onSubmit}>
         <Space className='container'>
           <Row gutter={[16, 16]}>
             <Col>
-              <Row gutter={[24, 24]} align='bottom' wrap={false}>
+              <Row gutter={[32, 32]} align='bottom' wrap={false}>
                 <Col>
                   <Form.Item
                     name='name'
@@ -70,7 +71,7 @@ const InventoryCreatePanel = () => {
           </Row>
         </Space>
       </Form>
-    </>
+    </div>
   );
 };
 
