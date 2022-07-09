@@ -5,8 +5,14 @@
   padding: 16px;
   border: 1px solid #d9d9d9;
   border-radius: 16px;
-}
+}r
 
 .inventory-create-panel-select {
   min-width: 200px;
+}
+
+.save-btn-container {
+  display: flex;
+  align-items: center;
+  margin-top: 12px;
 }

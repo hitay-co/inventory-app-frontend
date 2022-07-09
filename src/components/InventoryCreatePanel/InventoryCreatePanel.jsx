@@ -23,49 +23,41 @@ const InventoryCreatePanel = () => {
       <Divider orientation='left'>New Inventory</Divider>
       <Form onFinish={onSubmit}>
         <Space className='container'>
-          <Row gutter={[16, 16]}>
+          <Row gutter={[32, 32]}>
             <Col>
-              <Row gutter={[32, 32]} align='bottom' wrap={false}>
-                <Col>
-                  <Form.Item
-                    name='name'
-                    label='Inventory Name'
-                    labelCol={{ span: 24 }}
-                  >
-                    <Input />
-                  </Form.Item>
-                </Col>
-                <Col>
-                  <Form.Item
-                    name='type'
-                    label='Inventory Type'
-                    labelCol={{ span: 24 }}
-                  >
-                    <Select
-                      className='inventory-create-panel-select'
-                      allowClear
-                    >
-                      {typeOptions.map((type, index) => (
-                        <Option key={index} value={type}>
-                          {type}
-                        </Option>
-                      ))}
-                    </Select>
-                  </Form.Item>
-                </Col>
-                <Col>
-                  <Form.Item
-                    name='quantity'
-                    label='Quantity'
-                    labelCol={{ span: 24 }}
-                  >
-                    <InputNumber />
-                  </Form.Item>
-                </Col>
-              </Row>
+              <Form.Item
+                name='name'
+                label='Inventory Name'
+                labelCol={{ span: 24 }}
+              >
+                <Input />
+              </Form.Item>
             </Col>
-
             <Col>
+              <Form.Item
+                name='type'
+                label='Inventory Type'
+                labelCol={{ span: 24 }}
+              >
+                <Select className='inventory-create-panel-select' allowClear>
+                  {typeOptions.map((type, index) => (
+                    <Option key={index} value={type}>
+                      {type}
+                    </Option>
+                  ))}
+                </Select>
+              </Form.Item>
+            </Col>
+            <Col>
+              <Form.Item
+                name='quantity'
+                label='Quantity'
+                labelCol={{ span: 24 }}
+              >
+                <InputNumber />
+              </Form.Item>
+            </Col>
+            <Col className='save-btn-container'>
               <Button htmlType='submit'>Save</Button>
             </Col>
           </Row>
