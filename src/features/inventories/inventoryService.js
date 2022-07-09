@@ -23,9 +23,11 @@ const deleteInventory = async (id) => {
   return response.data;
 };
 
-export const inventoryService = {
+const inventoryService = {
   getInventories,
   createInventory,
   updateInventory,
   deleteInventory,
 };
+
+export default inventoryService;
