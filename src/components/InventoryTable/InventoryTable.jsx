@@ -1,4 +1,5 @@
 import { Space, Table } from 'antd';
+import { useSelector } from 'react-redux';
 import './InventoryTable.css';
 
 const columns = [
@@ -31,7 +32,9 @@ const columns = [
 ];
 
 const InventoryTable = () => {
-  return <Table columns={columns} dataSource={[]} />;
+  const { inventories } = useSelector((state) => state.inventories);
+
+  return <Table columns={columns} dataSource={inventories} />;
 };
 
 export default InventoryTable;
