@@ -10,6 +10,7 @@ import {
   Select,
   Tooltip,
 } from 'antd';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   createInventory,
@@ -17,12 +18,11 @@ import {
   reset,
 } from '../../features/inventories/inventorySlice';
 import './InventoryCreatePanel.css';
-import { useEffect } from 'react';
 
 const { Option } = Select;
 
 const InventoryCreatePanel = () => {
-  const { isRequestLoading, inventory } = useSelector(
+  const { isCreateLoading, isCreateSuccess } = useSelector(
     (state) => state.inventories
   );
   const dispatch = useDispatch();
@@ -54,13 +54,13 @@ const InventoryCreatePanel = () => {
   };
 
   useEffect(() => {
-    if (Object.keys(inventory)?.length > 0) {
+    if (isCreateSuccess) {
       openNotificationWithIcon('success', 'Inventory successfully created!');
       dispatch(reset());
       form.resetFields();
       dispatch(getInventories());
     }
-  }, [dispatch, form, inventory]);
+  }, [dispatch, form, isCreateSuccess]);
 
   const saveBtnContent = () => {
     if (isSaveBtnDisabled()) {
@@ -68,7 +68,7 @@ const InventoryCreatePanel = () => {
         <Tooltip title='Please enter all the fields.'>
           <Button
             htmlType='submit'
-            loading={isRequestLoading}
+            loading={isCreateLoading}
             disabled={isSaveBtnDisabled()}
           >
             Save
@@ -79,7 +79,7 @@ const InventoryCreatePanel = () => {
       return (
         <Button
           htmlType='submit'
-          loading={isRequestLoading}
+          loading={isCreateLoading}
           disabled={isSaveBtnDisabled()}
         >
           Save
@@ -87,6 +87,7 @@ const InventoryCreatePanel = () => {
       );
     }
   };
+
   return (
     <div className='inventory-create-panel-container'>
       <Divider orientation='left'>New Inventory</Divider>

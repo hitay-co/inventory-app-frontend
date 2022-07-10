@@ -9,7 +9,7 @@ import InventoryTable from '../InventoryTable/InventoryTable';
 import './Home.css';
 
 const Home = () => {
-  const { isRequestSuccess } = useSelector((state) => state.inventories);
+  const { isGetAllSuccess } = useSelector((state) => state.inventories);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -17,10 +17,10 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    if (isRequestSuccess) {
+    if (isGetAllSuccess) {
       dispatch(reset());
     }
-  }, [dispatch, isRequestSuccess]);
+  }, [dispatch, isGetAllSuccess]);
 
   return (
     <div className='home-container'>

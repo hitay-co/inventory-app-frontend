@@ -4,9 +4,12 @@ import inventoryService from './inventoryService';
 const initialState = {
   inventories: [],
   inventory: {},
-  isRequestLoading: false,
-  isRequestSuccess: false,
-  isRequestError: false,
+  isCreateLoading: false,
+  isCreateSuccess: false,
+  isCreateError: false,
+  isGetAllLoading: false,
+  isGetAllSuccess: false,
+  isGetAllError: false,
   errorMessage: '',
 };
 
@@ -47,30 +50,30 @@ export const inventorySlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(createInventory.pending, (state) => {
-        state.isRequestLoading = true;
+        state.isCreateLoading = true;
       })
       .addCase(createInventory.fulfilled, (state, action) => {
-        state.isRequestLoading = false;
-        state.isRequestSuccess = true;
-        state.inventory = action.payload;
+        state.isCreateLoading = false;
+        state.isCreateSuccess = true;
+        state.isCreateError = action.payload;
       })
       .addCase(createInventory.rejected, (state, action) => {
-        state.isRequestLoading = false;
-        state.isRequestError = true;
+        state.isCreateLoading = false;
+        state.isCreateError = true;
         state.errorMessage = action.payload;
       });
     builder
       .addCase(getInventories.pending, (state) => {
-        state.isRequestLoading = true;
+        state.isGetAllLoading = true;
       })
       .addCase(getInventories.fulfilled, (state, action) => {
-        state.isRequestLoading = false;
-        state.isRequestSuccess = true;
+        state.isGetAllLoading = false;
+        state.isGetAllSuccess = true;
         state.inventories = action.payload;
       })
       .addCase(getInventories.rejected, (state, action) => {
-        state.isRequestLoading = false;
-        state.isRequestError = true;
+        state.isGetAllLoading = false;
+        state.isGetAllError = true;
         state.errorMessage = action.payload;
       });
   },

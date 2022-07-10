@@ -1,7 +1,17 @@
-import { Space, Table } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
+import { Space, Spin, Table } from 'antd';
 import { useSelector } from 'react-redux';
-import './InventoryTable.css';
 import noDataIcon from '../../assets/images/no-data.png';
+import './InventoryTable.css';
+
+const spinIcon = (
+  <LoadingOutlined
+    style={{
+      fontSize: 24,
+    }}
+    spin
+  />
+);
 
 const columns = [
   {
@@ -33,7 +43,7 @@ const columns = [
 ];
 
 const InventoryTable = () => {
-  const { inventories, isRequestLoading } = useSelector(
+  const { inventories, isGetAllLoading } = useSelector(
     (state) => state.inventories
   );
 
@@ -50,7 +60,10 @@ const InventoryTable = () => {
       }}
       columns={columns}
       dataSource={inventories}
-      loading={isRequestLoading}
+      loading={{
+        indicator: <Spin indicator={spinIcon} />,
+        spinning: isGetAllLoading,
+      }}
     />
   );
 };
