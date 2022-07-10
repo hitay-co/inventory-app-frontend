@@ -12,6 +12,13 @@
   border-radius: 8px !important;
 }
 
+.ant-input,
+.ant-select-selector,
+.ant-input-number {
+  display: flex;
+  align-items: center;
+}
+
 @media (max-width: 600px) {
   .ant-input,
   .ant-select-selector,
@@ -26,7 +33,9 @@
 
   .ant-form-item-label > label,
   .ant-btn,
-  .ant-table-cell {
+  .ant-table-cell,
+  .ant-select-selection-placeholder,
+  input::placeholder {
     font-size: 12px;
   }
 }
