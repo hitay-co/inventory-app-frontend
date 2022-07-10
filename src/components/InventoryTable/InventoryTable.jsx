@@ -1,7 +1,13 @@
-import { LoadingOutlined } from '@ant-design/icons';
-import { Space, Spin, Table } from 'antd';
-import { useSelector } from 'react-redux';
+import { DeleteOutlined, LoadingOutlined } from '@ant-design/icons';
+import { Link, notification, Popconfirm, Spin, Table } from 'antd';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import noDataIcon from '../../assets/images/no-data.png';
+import {
+  deleteInventory,
+  getInventories,
+  reset,
+} from '../../features/inventories/inventorySlice';
 import './InventoryTable.css';
 
 const spinIcon = (
@@ -13,39 +19,67 @@ const spinIcon = (
   />
 );
 
-const columns = [
-  {
-    title: 'Inventory Name',
-    dataIndex: 'name',
-    key: 'name',
-  },
-  {
-    title: 'Type',
-    dataIndex: 'type',
-    key: 'type',
-  },
-  {
-    title: 'Quantity',
-    dataIndex: 'quantity',
-    key: 'quantity',
-  },
-
-  {
-    title: 'Action',
-    key: 'action',
-    render: (_, record) => (
-      <Space size='middle'>
-        <p>Edit {record.name}</p>
-        <p>Delete</p>
-      </Space>
-    ),
-  },
-];
-
 const InventoryTable = () => {
-  const { inventories, isGetAllLoading } = useSelector(
-    (state) => state.inventories
-  );
+  const dispatch = useDispatch();
+
+  const { inventories, isGetAllLoading, isDeleteSuccess, isDeleteLoading } =
+    useSelector((state) => state.inventories);
+
+  const handleDelete = (id) => {
+    dispatch(deleteInventory(id));
+  };
+
+  const openNotificationWithIcon = (type, message) => {
+    notification[type]({
+      message,
+      placement: 'bottomRight',
+    });
+  };
+
+  useEffect(() => {
+    if (isDeleteSuccess) {
+      dispatch(getInventories());
+      openNotificationWithIcon('success', 'Inventory successfully deleted!');
+      dispatch(reset());
+    }
+  }, [dispatch, isDeleteSuccess]);
+
+  const columns = [
+    {
+      title: 'Inventory Name',
+      dataIndex: 'name',
+      key: 'name',
+    },
+    {
+      title: 'Type',
+      dataIndex: 'type',
+      key: 'type',
+    },
+    {
+      title: 'Quantity',
+      dataIndex: 'quantity',
+      key: 'quantity',
+    },
+
+    {
+      title: 'Action',
+      key: 'action',
+      render: (_, record) =>
+        inventories?.length >= 1 ? (
+          <Popconfirm
+            title='Sure to delete?'
+            onConfirm={() => handleDelete(record._id)}
+          >
+            <a href='/#'>
+              <DeleteOutlined />
+              <span style={{ paddingLeft: '8px' }}>Delete</span>
+            </a>
+          </Popconfirm>
+        ) : null,
+    },
+  ];
+
+  if (isDeleteLoading) return <Spin indicator={spinIcon} size='large' />;
 
   return (
     <Table

@@ -4,3 +4,7 @@
   object-fit: contain;
   border-radius: 10px;
 }
+
+.ant-popover-buttons {
+  display: flex;
+}

@@ -10,6 +10,9 @@ const initialState = {
   isGetAllLoading: false,
   isGetAllSuccess: false,
   isGetAllError: false,
+  isDeleteLoading: false,
+  isDeleteSuccess: false,
+  isDeleteError: false,
   errorMessage: '',
 };
 
@@ -18,6 +21,19 @@ export const createInventory = createAsyncThunk(
   async (inventory, thunkAPI) => {
     try {
       return await inventoryService.createInventory(inventory);
+    } catch (error) {
+      const errorMessage = error && error.message;
+
+      return thunkAPI.rejectWithValue(errorMessage);
+    }
+  }
+);
+
+export const deleteInventory = createAsyncThunk(
+  'inventories/delete',
+  async (id, thunkAPI) => {
+    try {
+      return await inventoryService.deleteInventory(id);
     } catch (error) {
       const errorMessage = error && error.message;
 
@@ -55,11 +71,27 @@ export const inventorySlice = createSlice({
       .addCase(createInventory.fulfilled, (state, action) => {
         state.isCreateLoading = false;
         state.isCreateSuccess = true;
-        state.isCreateError = action.payload;
+        state.inventory = action.payload;
       })
       .addCase(createInventory.rejected, (state, action) => {
         state.isCreateLoading = false;
         state.isCreateError = true;
+        state.errorMessage = action.payload;
+      });
+    builder
+      .addCase(deleteInventory.pending, (state) => {
+        state.isDeleteLoading = true;
+      })
+      .addCase(deleteInventory.fulfilled, (state, action) => {
+        state.isDeleteLoading = false;
+        state.isDeleteSuccess = true;
+        state.inventories.filter(
+          (inventory) => inventory._id !== action.payload._id
+        );
+      })
+      .addCase(deleteInventory.rejected, (state, action) => {
+        state.isDeleteLoading = false;
+        state.isDeleteError = true;
         state.errorMessage = action.payload;
       });
     builder
