@@ -1,6 +1,7 @@
 import { Space, Table } from 'antd';
 import { useSelector } from 'react-redux';
 import './InventoryTable.css';
+import noDataIcon from '../../assets/images/no-data.png';
 
 const columns = [
   {
@@ -32,9 +33,26 @@ const columns = [
 ];
 
 const InventoryTable = () => {
-  const { inventories } = useSelector((state) => state.inventories);
+  const { inventories, isRequestLoading } = useSelector(
+    (state) => state.inventories
+  );
 
-  return <Table columns={columns} dataSource={inventories} />;
+  return (
+    <Table
+      locale={{
+        emptyText: (
+          <img
+            src={noDataIcon}
+            alt='no-data-icon'
+            className='table-no-data-icon'
+          />
+        ),
+      }}
+      columns={columns}
+      dataSource={inventories}
+      loading={isRequestLoading}
+    />
+  );
 };
 
 export default InventoryTable;

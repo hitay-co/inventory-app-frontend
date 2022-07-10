@@ -3,7 +3,7 @@ import 'antd/dist/antd.min.css';
 import React from 'react';
 import './App.css';
 import Home from './components/Home/Home';
-const { Header, Footer, Content } = Layout;
+const { Header, Content } = Layout;
 
 const App = () => {
   return (
@@ -12,7 +12,6 @@ const App = () => {
       <Content>
         <Home />
       </Content>
-      <Footer>Footer</Footer>
     </Layout>
   );
 };

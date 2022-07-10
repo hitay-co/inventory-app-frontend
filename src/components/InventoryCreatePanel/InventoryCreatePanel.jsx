@@ -11,13 +11,20 @@ import {
   Tooltip,
 } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import { createInventory } from '../../features/inventories/inventorySlice';
+import {
+  createInventory,
+  getInventories,
+  reset,
+} from '../../features/inventories/inventorySlice';
 import './InventoryCreatePanel.css';
+import { useEffect } from 'react';
 
 const { Option } = Select;
 
 const InventoryCreatePanel = () => {
-  const { isRequestLoading } = useSelector((state) => state.inventories);
+  const { isRequestLoading, inventory } = useSelector(
+    (state) => state.inventories
+  );
   const dispatch = useDispatch();
   const [form] = Form.useForm();
   const currentInventoryName = Form.useWatch('name', form);
@@ -45,6 +52,15 @@ const InventoryCreatePanel = () => {
   const onSubmit = (inventoryData) => {
     dispatch(createInventory(inventoryData));
   };
+
+  useEffect(() => {
+    if (Object.keys(inventory)?.length > 0) {
+      openNotificationWithIcon('success', 'Inventory successfully created!');
+      dispatch(reset());
+      form.resetFields();
+      dispatch(getInventories());
+    }
+  }, [dispatch, form, inventory]);
 
   const saveBtnContent = () => {
     if (isSaveBtnDisabled()) {
