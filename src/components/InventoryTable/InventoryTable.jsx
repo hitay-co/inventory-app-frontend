@@ -22,8 +22,14 @@ const spinIcon = (
 const InventoryTable = () => {
   const dispatch = useDispatch();
 
-  const { inventories, isGetAllLoading, isDeleteSuccess, isDeleteLoading } =
-    useSelector((state) => state.inventories);
+  const {
+    inventories,
+    isGetAllLoading,
+    isDeleteSuccess,
+    isDeleteLoading,
+    isDeleteError,
+    errorMessage,
+  } = useSelector((state) => state.inventories);
 
   const handleDelete = (id) => {
     dispatch(deleteInventory(id));
@@ -43,6 +49,13 @@ const InventoryTable = () => {
       dispatch(reset());
     }
   }, [dispatch, isDeleteSuccess]);
+
+  useEffect(() => {
+    if (isDeleteError) {
+      openNotificationWithIcon('error', errorMessage);
+      dispatch(reset());
+    }
+  }, [dispatch, errorMessage, isDeleteError]);
 
   const columns = [
     {
