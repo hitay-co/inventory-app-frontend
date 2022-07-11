@@ -7,7 +7,7 @@ const { Header, Content } = Layout;
 
 const App = () => {
   return (
-    <Layout className='layout'>
+    <Layout>
       <Header className='header'>Inventory App</Header>
       <Content>
         <Home />
