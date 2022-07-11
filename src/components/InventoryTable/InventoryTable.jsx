@@ -1,5 +1,5 @@
 import { DeleteOutlined, LoadingOutlined } from '@ant-design/icons';
-import { Link, notification, Popconfirm, Spin, Table } from 'antd';
+import { notification, Popconfirm, Spin, Table } from 'antd';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import noDataIcon from '../../assets/images/no-data.png';
@@ -92,6 +92,7 @@ const InventoryTable = () => {
           />
         ),
       }}
+      rowKey={(record) => record._id}
       columns={columns}
       dataSource={inventories}
       loading={{

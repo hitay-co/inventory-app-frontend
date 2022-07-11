@@ -22,7 +22,8 @@ export const createInventory = createAsyncThunk(
     try {
       return await inventoryService.createInventory(inventory);
     } catch (error) {
-      const errorMessage = error && error.message;
+      const errorMessage =
+        error.response && error.response.data && error.response.data.message;
 
       return thunkAPI.rejectWithValue(errorMessage);
     }
@@ -35,7 +36,8 @@ export const deleteInventory = createAsyncThunk(
     try {
       return await inventoryService.deleteInventory(id);
     } catch (error) {
-      const errorMessage = error && error.message;
+      const errorMessage =
+        error.response && error.response.data && error.response.data.message;
 
       return thunkAPI.rejectWithValue(errorMessage);
     }
@@ -48,7 +50,8 @@ export const getInventories = createAsyncThunk(
     try {
       return await inventoryService.getInventories();
     } catch (error) {
-      const errorMessage = error && error.message;
+      const errorMessage =
+        error.response && error.response.data && error.response.data.message;
 
       return thunkAPI.rejectWithValue(errorMessage);
     }

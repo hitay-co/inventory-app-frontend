@@ -22,9 +22,8 @@ import './InventoryCreatePanel.css';
 const { Option } = Select;
 
 const InventoryCreatePanel = () => {
-  const { isCreateLoading, isCreateSuccess } = useSelector(
-    (state) => state.inventories
-  );
+  const { isCreateLoading, isCreateSuccess, isCreateError, errorMessage } =
+    useSelector((state) => state.inventories);
   const dispatch = useDispatch();
   const [form] = Form.useForm();
   const currentInventoryName = Form.useWatch('name', form);
@@ -61,6 +60,13 @@ const InventoryCreatePanel = () => {
       dispatch(getInventories());
     }
   }, [dispatch, form, isCreateSuccess]);
+
+  useEffect(() => {
+    if (isCreateError) {
+      openNotificationWithIcon('error', errorMessage);
+      dispatch(reset());
+    }
+  }, [dispatch, errorMessage, isCreateError]);
 
   const saveBtnContent = () => {
     if (isSaveBtnDisabled()) {
