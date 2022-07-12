@@ -2,12 +2,6 @@
 
 Inventory App Frontend project. React.js, Ant Design UI Library, Redux Toolkit, axios.
 
-## Usage
-
-### Set Environment Variables
-
-Rename the .envexample to .env.development.local
-
 ### Install frontend dependencies
 
 ```bash
