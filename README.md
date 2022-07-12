@@ -1,6 +1,8 @@
 # Inventory App Frontend
 
 Inventory App Frontend project. React.js, Ant Design UI Library, Redux Toolkit, axios.
+Hosted with <a href="https://www.netlify.com" target="_blank">Netlify</a><br/>
+Hosted URL : <a href="https://n11-inventory-app.netlify.app" target="_blank">Inventory App</a><br/>
 
 ### Install frontend dependencies
 
