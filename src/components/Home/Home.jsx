@@ -14,7 +14,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(getInventories());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (isGetAllSuccess) {
